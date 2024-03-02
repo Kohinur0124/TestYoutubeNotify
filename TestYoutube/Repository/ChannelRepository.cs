@@ -14,7 +14,7 @@ namespace TestYoutube.Repository
         }
 
 
-        public async ValueTask<bool> AddChannel(string channelId, string channelName)
+        public async ValueTask<bool> AddChannel(string channelId, string channelName, string playlistId)
 		{
 			try
 			{
@@ -27,6 +27,7 @@ namespace TestYoutube.Repository
 					{
 						ChannelId = channelId,
 						ChannelTitle = channelName,
+						PlaylistId = playlistId,
 						LastCheckDate = DateTimeOffset.Now,
 					};
 					await _context.ChannelYoutube.AddAsync(chan);
@@ -106,6 +107,28 @@ namespace TestYoutube.Repository
 			var users = await _context.UserChannels.Where(x => x.ChatIdTelegram == userId).ToListAsync();
 
 			return users;
+		}
+
+		public async ValueTask<bool> DeleteChannel(string channelId, string chatId)
+		{
+			try
+			{
+
+				var check = _context.UserChannels.FirstOrDefault(x => x.ChannelYoutubeId == channelId && x.ChatIdTelegram == chatId);
+				if (check != null)
+				{
+
+				
+					_context.UserChannels.Remove(check);
+					await _context.SaveChangesAsync();
+					return true;
+				}
+				return false;
+			}
+			catch (Exception ex)
+			{
+				return false;
+			}
 		}
 	}
 }

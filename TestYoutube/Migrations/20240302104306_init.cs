@@ -17,6 +17,7 @@ namespace TestYoutube.Migrations
                 {
                     ChannelId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ChannelTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PlaylistId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastCheckDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>

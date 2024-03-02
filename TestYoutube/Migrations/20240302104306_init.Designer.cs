@@ -12,7 +12,7 @@ using TestYoutube.Data;
 namespace TestYoutube.Migrations
 {
     [DbContext(typeof(BotYoutubeDbContext))]
-    [Migration("20240301200942_init")]
+    [Migration("20240302104306_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -36,6 +36,10 @@ namespace TestYoutube.Migrations
 
                     b.Property<DateTimeOffset>("LastCheckDate")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("PlaylistId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ChannelId");
 

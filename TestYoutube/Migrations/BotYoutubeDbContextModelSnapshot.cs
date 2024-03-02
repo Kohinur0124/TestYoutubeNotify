@@ -34,6 +34,10 @@ namespace TestYoutube.Migrations
                     b.Property<DateTimeOffset>("LastCheckDate")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("PlaylistId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ChannelId");
 
                     b.ToTable("ChannelYoutube");
